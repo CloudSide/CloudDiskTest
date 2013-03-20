@@ -45,8 +45,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        _isExecuting = NO;
         _clog = [[CLog alloc] init];
+        [_clog setCustomType:kLogCustomType];
     }
     return self;
 }
@@ -87,7 +87,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)onCancelFileLoad:(id)sender {
@@ -133,9 +132,7 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [paths objectAtIndex:0];
-    NSString *tmpDirectory = [NSString stringWithFormat:@"%@/kdisk/%d/download/%@", documentsDirectoryPath,
-                                                                                    _userInfo.userID,
-                                                                                    _metadata.fileID];
+    NSString *tmpDirectory = [NSString stringWithFormat:@"%@/kdisk/%d/download/%@", documentsDirectoryPath, _userInfo.userID, _metadata.fileID];
     NSString *tmpPath = [NSString stringWithFormat:@"%@/%@", tmpDirectory, _metadata.name];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -143,6 +140,9 @@
     if (![fileManager fileExistsAtPath:tmpPath]) {
         
         if ([fileManager createDirectoryAtPath:tmpDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
+            
+            [_progressLabel setHidden:NO];
+            [_progressView setHidden:NO];
             
             if (_downloadFileOp != nil) {
                 
@@ -163,9 +163,6 @@
             [_clog startRecordTime];
             
             [item release];
-            
-            [_progressLabel setHidden:NO];
-            [_progressView setHidden:NO];
             
         } else {
             
@@ -206,9 +203,6 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-     
-    //NSLog(@"%@", error);
-    //NSLog(@"%@", error.userInfo);
     
     if ([[error.userInfo valueForKey:@"NSLocalizedDescription"] isEqualToString:@"Frame load interrupted"]) {
         
@@ -230,6 +224,8 @@
 {
     if (_downloadFileOp == operation) {
         
+        [_clog setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameKingDisk, @"download", @""]];
+        [_clog setHttpBytesDown:[NSString stringWithFormat:@"%u", _metadata.size]];
         [_clog stopRecordTime];
         DDLogInfo(@"%@", _clog);
         
@@ -262,6 +258,20 @@
             [webView release];
             
             [self.view setNeedsDisplay];
+        
+        } else {
+            
+            [_progressView setHidden:YES];
+            [_progressLabel setHidden:YES];
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
+                                                                message:[NSString stringWithFormat:@"文件打开失败，请重新下载！"]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Okay"
+                                                      otherButtonTitles:nil];
+            
+            [alertView show];
+            [alertView release];
         }
         
         [_downloadFileOp release];
@@ -271,22 +281,23 @@
 
 - (void)operation:(KPOperation *)operation fail:(NSString *)errorMessage
 {
+    [_clog setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameKingDisk, @"download", [NSString stringWithFormat:@"%d", 2012]]];
     [_clog stopRecordTime];
     DDLogInfo(@"%@", _clog);
     
     NSLog(@"fail Message:%@",errorMessage);
+        
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
+                                                        message:[NSString stringWithFormat:@"文件下载失败！"]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
     
-    if ([errorMessage isEqualToString:@"The Internet connection appears to be offline."]) {
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
-                                                            message:[NSString stringWithFormat:@"请检查您的网络连接"]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Okay"
-                                                  otherButtonTitles:nil];
-        
-        [alertView show];
-        [alertView release];
-    }
+    [alertView show];
+    [alertView release];
+    
+    [_progressView setHidden:YES];
+    [_progressLabel setHidden:YES];
 }
 
 - (void)operation:(KPOperation *)operation

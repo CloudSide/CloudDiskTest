@@ -89,7 +89,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)onCancelFileLoad:(id)sender {
@@ -141,6 +140,9 @@
         
         if ([fileManager createDirectoryAtPath:tmpDirectory withIntermediateDirectories:YES attributes:nil error:nil]) {
             
+            [_progressView setHidden:NO];
+            [_progressLabel setHidden:NO];
+            
             NSString *access_token = [BaiduUserSessionManager shareUserSessionManager].currentUserSession.accessToken;
             
             NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=download&access_token=%@&path=%@", access_token, [_metadata.filePath URLEncodedString]];
@@ -151,22 +153,15 @@
                 [_request cancel];
             }
             
-            //requestText = [requestText stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8)];
             NSURL *requestUrl = [NSURL URLWithString:requestText];
-            
-            _request = [[ASIHTTPRequest requestWithURL:requestUrl] retain];
-            
+            self.request = [ASIHTTPRequest requestWithURL:requestUrl];
             [_request setDownloadDestinationPath:tmpPath];
             [_request setRequestMethod:httpMethodText];
-            
             [_request setDelegate:self];
             [_request setDownloadProgressDelegate:self];
             [_request startAsynchronous];
             
             [_clog startRecordTime];
-            
-            [_progressView setHidden:NO];
-            [_progressLabel setHidden:NO];
             
         } else {
             
@@ -207,9 +202,6 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-     
-    //NSLog(@"%@", error);
-    //NSLog(@"%@", error.userInfo);
     
     if ([[error.userInfo valueForKey:@"NSLocalizedDescription"] isEqualToString:@"Frame load interrupted"]) {
         
@@ -265,6 +257,18 @@
         
         NSError *error = [request error];
         NSLog(@"%@", error);
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"文件下载失败！"
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Okay"
+                                                  otherButtonTitles:nil];
+        
+        [alertView show];
+        [alertView release];
+        
+        [_progressView setHidden:YES];
+        [_progressLabel setHidden:YES];
     }
     
     [_clog setHttpBytesDown:[NSString stringWithFormat:@"%llu", [request contentLength]]];
@@ -275,18 +279,30 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     [_clog setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"download", [NSString stringWithFormat:@"%d", request.error.code]]];
+    
     [_clog stopRecordTime];
     DDLogInfo(@"%@", _clog);
     
     NSError *error = [request error];
     NSLog(@"%@", error);
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"文件下载失败！"
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+    
+    [alertView show];
+    [alertView release];
+    
+    [_progressView setHidden:YES];
+    [_progressLabel setHidden:YES];
 }
 
 - (void)setProgress:(float)newProgress {
     
     _progressView.progress = newProgress;
     _progressLabel.text = [NSString stringWithFormat:@"%.1f%%", newProgress*100.0f];
-
 }
 
 @end

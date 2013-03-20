@@ -64,7 +64,8 @@
     [_consumer release];
     [_directoryInfo release];
     
-    [_clog release], _clog = nil;
+    [_clogGetList release], _clogGetList = nil;
+    [_clogUpload release], _clogUpload = nil;
     
     [super dealloc];
 }
@@ -75,7 +76,11 @@
     
     if (self) {
         
-        _clog = [[CLog alloc] init];
+        _clogGetList = [[CLog alloc] init];
+        _clogUpload = [[CLog alloc] init];
+        
+        [_clogGetList setCustomType:kLogCustomType];
+        [_clogUpload setCustomType:kLogCustomType];
     }
     
     return self;
@@ -193,7 +198,7 @@
     _getDirectoryOp = [[KPGetDirectoryOperation alloc] initWithDelegate:self operationItem:item];
     [_getDirectoryOp executeOperation];
     
-    [_clog startRecordTime];
+    [_clogGetList startRecordTime];
     
     [item release];
     
@@ -222,6 +227,7 @@
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *theAsset) {
         
         NSString *fileName = [[theAsset defaultRepresentation] filename];
+        _uploadSize = [[theAsset defaultRepresentation] size];
         NSString *tmpPath = [NSString stringWithFormat:@"%@/%@", [NSHomeDirectory() stringByAppendingFormat: @"/tmp"], fileName];
         
         NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
@@ -281,7 +287,7 @@
             _uploadFileOp = [[KPUploadFileOperation alloc] initWithDelegate:self operationItem:item];
             [_uploadFileOp executeOperation];
             
-            [_clog startRecordTime];
+            [_clogUpload startRecordTime];
             
             [item release];
             
@@ -426,8 +432,9 @@
 {
     if (_getDirectoryOp == operation) {
         
-        [_clog stopRecordTime];
-        DDLogInfo(@"%@", _clog);
+        [_clogGetList setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameKingDisk, @"get_list", @""]];
+        [_clogGetList stopRecordTime];
+        DDLogInfo(@"%@", _clogGetList);
         
         _directoryInfo = data;
         [_directoryInfo retain];
@@ -437,8 +444,10 @@
     }
     else if (_uploadFileOp == operation) {
         
-        [_clog stopRecordTime];
-        DDLogInfo(@"%@", _clog);
+        [_clogUpload setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameKingDisk, @"upload", @""]];
+        [_clogUpload setHttpBytesUp:[NSString stringWithFormat:@"%llu", _uploadSize]];
+        [_clogUpload stopRecordTime];
+        DDLogInfo(@"%@", _clogUpload);
         
         _hud.mode = MBProgressHUDModeText;
         _hud.labelText = @"上传成功！";
@@ -485,8 +494,9 @@
 {
     if (_uploadFileOp == operation) {
         
-        [_clog stopRecordTime];
-        DDLogInfo(@"%@", _clog);
+        [_clogUpload setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameKingDisk, @"upload", [NSString stringWithFormat:@"%d", 2012]]];
+        [_clogUpload stopRecordTime];
+        DDLogInfo(@"%@", _clogUpload);
         
         _hud.mode = MBProgressHUDModeText;
         _hud.labelText = @"上传失败...";
@@ -500,22 +510,24 @@
         
     } else if (_getDirectoryOp == operation) {
         
-        [_clog stopRecordTime];
-        DDLogInfo(@"%@", _clog);
-    }
-    
-    NSLog(@"fail Message:%@",errorMessage);
-    
-    if ([errorMessage isEqualToString:@"The Internet connection appears to be offline."]) {
+        [_clogGetList setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameKingDisk, @"get_list", [NSString stringWithFormat:@"%d", 2012]]];
+        [_clogGetList stopRecordTime];
+        DDLogInfo(@"%@", _clogGetList);
+        
+        NSLog(@"fail Message:%@",errorMessage);
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
-                                                            message:[NSString stringWithFormat:@"请检查您的网络连接"]
+                                                            message:[NSString stringWithFormat:@"   获取列表失败！"]
                                                            delegate:nil
                                                   cancelButtonTitle:@"Okay"
                                                   otherButtonTitles:nil];
         
         [alertView show];
         [alertView release];
+        
+    } else if (_getUserInfoOp == operation) {
+        
+        [self onRefreshButtonPressed:nil];
     }
     
     UIBarButtonItem *refreshBtn = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh

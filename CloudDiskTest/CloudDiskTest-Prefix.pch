@@ -23,9 +23,10 @@
 #define nameBDiskBtn                                    @"bDiskBtn"
 #define nameKDiskBtn                                    @"kDiskBtn"
 
-#define kVdiskSDKDemoAppKey                             @"1760281982"
-#define kVdiskSDKDemoAppSecret                          @"8f836595aff61dd26028c9a381109631"
-#define kVdiskSDKDemoAppRedirectURI                     @"http://vauth.appsina.com/callback.php"
+#define kVdiskSDKDemoAppKey                             @"1586711366"
+#define kVdiskSDKDemoAppSecret                          @"c7c3711444291fffed9d4dbf469ee60f"
+#define kVdiskSDKDemoAppRedirectURI                     @"http://vauth.appsina.com/Examples/callback.php"
+
 
 #define kWeiboAppKey                                    @"2938478327"
 #define kWeiboAppSecret                                 @"968d785bb0fd2188d2d132a8dd8ed990"

@@ -14,7 +14,6 @@
 @interface KdiskReaderViewController : UIViewController <KPOperationDelegate, UIWebViewDelegate> {
     
     KPDownloadFileOperation             *_downloadFileOp;    // 下载文件
-    BOOL _isExecuting;
     CLog *_clog;
 }
 

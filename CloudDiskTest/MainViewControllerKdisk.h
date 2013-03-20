@@ -37,7 +37,9 @@
     KPGetDirectoryOperation             *_getDirectoryOp;    // 获取文件（夹）信息操作
     KPUploadFileOperation               *_uploadFileOp;      // 上传文件
     KPGetUserInfoOperation              *_getUserInfoOp;     // 获取用户信息操作
-    CLog *_clog;
+    CLog *_clogGetList;
+    CLog *_clogUpload;
+    long long _uploadSize;
 }
 
 @property (nonatomic, retain) KPUserInfo *userInfo;

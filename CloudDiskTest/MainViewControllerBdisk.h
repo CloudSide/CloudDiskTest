@@ -19,7 +19,9 @@
 
 @interface MainViewControllerBdisk : UITableViewController <BaiduAPIRequestDelegate, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MBProgressHUDDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate> {
 
-    CLog *_clog;
+    CLog *_clogGetList;
+    CLog *_clogUpload;
+    long long _uploadSize;
 }
 
 @property (nonatomic, retain) Baidu *bdConnect;

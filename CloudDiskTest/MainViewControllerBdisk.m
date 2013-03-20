@@ -62,7 +62,8 @@
     [_currentPath release];
     [_deletePath release];
     
-    [_clog release], _clog = nil;
+    [_clogGetList release], _clogGetList = nil;
+    [_clogUpload release], _clogUpload = nil;
     
     [super dealloc];
 }
@@ -73,7 +74,11 @@
     
     if (self) {
         
-        _clog = [[CLog alloc] init];
+        _clogGetList = [[CLog alloc] init];
+        _clogUpload = [[CLog alloc] init];
+        
+        [_clogGetList setCustomType:kLogCustomType];
+        [_clogUpload setCustomType:kLogCustomType];
     }
     
     return self;
@@ -141,8 +146,6 @@
         _path = @"/apps/CloudDisk";
     }
     
-    // Clog
-    
     [self getDirectoryInfo:_path];
     
     UIActivityIndicatorView *activityView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
@@ -167,7 +170,7 @@
     
     [self.bdConnect apiRequestWithUrl:requestText httpMethod:httpMethodText params:nil andDelegate:self];
     
-    [_clog startRecordTime];
+    [_clogGetList startRecordTime];
 }
 
 - (void)onUploadButtonPressed:(id)sender {
@@ -277,6 +280,7 @@
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *theAsset) {
         
         NSString *fileName = [[theAsset defaultRepresentation] filename];
+        _uploadSize = [[theAsset defaultRepresentation] size];
         NSString *tmpPath = [NSString stringWithFormat:@"%@/%@", [NSHomeDirectory() stringByAppendingFormat: @"/tmp"], fileName];
         
         NSMutableData *emptyData = [[NSMutableData alloc] initWithLength:0];
@@ -328,21 +332,19 @@
             NSString *destPath = [NSString stringWithFormat:@"%@%@", _currentPath, fileName];
             NSString *access_token = [BaiduUserSessionManager shareUserSessionManager].currentUserSession.accessToken;
             NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=upload&path=%@&access_token=%@&ondup=overwrite", [destPath URLEncodedString], access_token];
-            requestText = [requestText stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8)];
             
             NSString *httpMethodText = @"POST";
             
             NSURL *requestUrl = [NSURL URLWithString:requestText];
             self.request = [ASIFormDataRequest requestWithURL:requestUrl];
             [_request setRequestMethod:httpMethodText];
-            
             [_request setFile:tmpPath forKey:@"file"];
             [_request setDelegate:self];
             [_request setUploadProgressDelegate:self];
             
             [_request startAsynchronous];
             
-            [_clog startRecordTime];
+            [_clogUpload startRecordTime];
             
             
             // loading....
@@ -386,8 +388,9 @@
 
 - (void)apiRequestDidFinishLoadWithResult:(id)result
 {
-    [_clog stopRecordTime];
-    DDLogInfo(@"%@", _clog);
+    [_clogGetList setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"get_list", @""]];
+    [_clogGetList stopRecordTime];
+    DDLogInfo(@"%@", _clogGetList);
     
     UIBarButtonItem *refreshBtn = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                  target:self
@@ -411,8 +414,9 @@
 
 - (void)apiRequestDidFailLoadWithError:(NSError*)error
 {
-    [_clog stopRecordTime];
-    DDLogInfo(@"%@", _clog);
+    [_clogGetList setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"get_list", [NSString stringWithFormat:@"%d", error.code]]];
+    [_clogGetList stopRecordTime];
+    DDLogInfo(@"%@", _clogGetList);
     
     UIBarButtonItem *refreshBtn = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                  target:self
@@ -437,12 +441,13 @@
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     
-    NSLog(@"[request responseStatusCode]: %d", [request responseStatusCode]);
-    NSLog(@"[request responseString]: %@", [request responseString]);
-    
-    
     if ([request responseStatusCode] / 100 == 2) {
       
+        [_clogUpload setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"upload", @""]];
+        [_clogUpload setHttpBytesUp:[NSString stringWithFormat:@"%llu", _uploadSize]];
+        [_clogUpload stopRecordTime];
+        DDLogInfo(@"%@", _clogUpload);
+
         _hud.mode = MBProgressHUDModeText;
         _hud.labelText = @"上传成功！";
         _hud.detailsLabelText = nil;
@@ -454,6 +459,10 @@
         
         
     } else {
+        
+        [_clogUpload setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"upload", [NSString stringWithFormat:@"%d", [request responseStatusCode]]]];
+        [_clogUpload stopRecordTime];
+        DDLogInfo(@"%@", _clogUpload);
     
         _hud.mode = MBProgressHUDModeText;
         _hud.labelText = @"上传失败...";
@@ -463,19 +472,15 @@
         [_hud show:NO];
     }
     
-    
-    [_clog stopRecordTime];
-    
-    DDLogInfo(@"%@", _clog);
-    
     //delete tmp file
     [[NSFileManager defaultManager] removeItemAtPath:_deletePath error:nil];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    [_clog stopRecordTime];
-    DDLogInfo(@"%@", _clog);
+    [_clogUpload setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"upload", [NSString stringWithFormat:@"%d", [request responseStatusCode]]]];
+    [_clogUpload stopRecordTime];
+    DDLogInfo(@"%@", _clogUpload);
     
     NSError *error = [request error];
     NSLog(@"%@", error);
