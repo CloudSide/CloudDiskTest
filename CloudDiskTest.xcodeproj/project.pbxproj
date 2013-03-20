@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F70DF1016F9944000535903 /* libVdiskSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5067A64016F989510021326B /* libVdiskSDK-iOS.a */; };
 		5032582A16F2EF33005F468B /* BdiskDirectoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5032582916F2EF33005F468B /* BdiskDirectoryInfo.m */; };
 		5032582E16F2EF4F005F468B /* BdiskFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5032582D16F2EF4F005F468B /* BdiskFileInfo.m */; };
 		5036C7C016E98CB30000661B /* KPAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5036C7BF16E98CB30000661B /* KPAuthViewController.m */; };
@@ -157,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F70DF1016F9944000535903 /* libVdiskSDK-iOS.a in Frameworks */,
 				503A4E1616E5CF7500B2CC3A /* CoreFoundation.framework in Frameworks */,
 				50589D4716E090960093F832 /* libz.dylib in Frameworks */,
 				50589D4516E090890093F832 /* Security.framework in Frameworks */,
@@ -538,7 +540,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudDiskTest/CloudDiskTest-Prefix.pch";
-				HEADER_SEARCH_PATHS = "/Users/Littlebox/workspace/svn/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../svn/vdisk/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK/**";
 				INFOPLIST_FILE = "CloudDiskTest/CloudDiskTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-all_load";
@@ -558,7 +560,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CloudDiskTest/CloudDiskTest-Prefix.pch";
-				HEADER_SEARCH_PATHS = "/Users/Littlebox/workspace/svn/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../svn/vdisk/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK/**";
 				INFOPLIST_FILE = "CloudDiskTest/CloudDiskTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-all_load";
