@@ -1,0 +1,596 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5032582A16F2EF33005F468B /* BdiskDirectoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5032582916F2EF33005F468B /* BdiskDirectoryInfo.m */; };
+		5032582E16F2EF4F005F468B /* BdiskFileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5032582D16F2EF4F005F468B /* BdiskFileInfo.m */; };
+		5036C7C016E98CB30000661B /* KPAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5036C7BF16E98CB30000661B /* KPAuthViewController.m */; };
+		5038F63C16F1E65200B76463 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5038F63B16F1E65200B76463 /* MBProgressHUD.m */; };
+		503A4E1616E5CF7500B2CC3A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503A4E1516E5CF7500B2CC3A /* CoreFoundation.framework */; };
+		503A4E1816E5D4B600B2CC3A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50589D4A16E09A840093F832 /* RootViewController.m */; };
+		503A4E1A16E5D5D300B2CC3A /* libVdiskSDK-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 503A4E0C16E5CB6600B2CC3A /* libVdiskSDK-iOS.a */; };
+		50589D1D16E08C140093F832 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D1C16E08C140093F832 /* UIKit.framework */; };
+		50589D1F16E08C140093F832 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D1E16E08C140093F832 /* Foundation.framework */; };
+		50589D2116E08C140093F832 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D2016E08C140093F832 /* CoreGraphics.framework */; };
+		50589D2716E08C140093F832 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50589D2516E08C140093F832 /* InfoPlist.strings */; };
+		50589D2916E08C140093F832 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50589D2816E08C140093F832 /* main.m */; };
+		50589D2D16E08C140093F832 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50589D2C16E08C140093F832 /* AppDelegate.m */; };
+		50589D2F16E08C140093F832 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50589D2E16E08C140093F832 /* Default.png */; };
+		50589D3116E08C140093F832 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50589D3016E08C140093F832 /* Default@2x.png */; };
+		50589D3316E08C140093F832 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50589D3216E08C140093F832 /* Default-568h@2x.png */; };
+		50589D3B16E0901A0093F832 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D3A16E0901A0093F832 /* QuartzCore.framework */; };
+		50589D3D16E0904B0093F832 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D3C16E0904B0093F832 /* MobileCoreServices.framework */; };
+		50589D3F16E0905A0093F832 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D3E16E0905A0093F832 /* CFNetwork.framework */; };
+		50589D4116E0906A0093F832 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4016E0906A0093F832 /* SystemConfiguration.framework */; };
+		50589D4316E0907D0093F832 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4216E0907D0093F832 /* AssetsLibrary.framework */; };
+		50589D4516E090890093F832 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4416E090890093F832 /* Security.framework */; };
+		50589D4716E090960093F832 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4616E090960093F832 /* libz.dylib */; };
+		5058A26A16E09E060093F832 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5058A26916E09E060093F832 /* Icon@2x.png */; };
+		5058A27016E0C4F00093F832 /* bb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5058A26F16E0C4F00093F832 /* bb.jpg */; };
+		5058A27C16E0CBA80093F832 /* kk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5058A27B16E0CBA80093F832 /* kk@2x.png */; };
+		505E9A9F16E858CA00CC928D /* Baidu.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A8A16E858C900CC928D /* Baidu.m */; };
+		505E9AA016E858CA00CC928D /* BaiduAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A8C16E858C900CC928D /* BaiduAPIRequest.m */; };
+		505E9AA116E858CA00CC928D /* BaiduAuthorizeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A8E16E858C900CC928D /* BaiduAuthorizeManager.m */; };
+		505E9AA216E858CA00CC928D /* BaiduAuthorizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9016E858CA00CC928D /* BaiduAuthorizeViewController.m */; };
+		505E9AA316E858CA00CC928D /* BaiduBaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9216E858CA00CC928D /* BaiduBaseNavigationViewController.m */; };
+		505E9AA416E858CA00CC928D /* BaiduConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9416E858CA00CC928D /* BaiduConfig.m */; };
+		505E9AA516E858CA00CC928D /* BaiduError.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9716E858CA00CC928D /* BaiduError.m */; };
+		505E9AA616E858CA00CC928D /* BaiduUserSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9A16E858CA00CC928D /* BaiduUserSession.m */; };
+		505E9AA716E858CA00CC928D /* BaiduUserSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9C16E858CA00CC928D /* BaiduUserSessionManager.m */; };
+		505E9AA816E858CA00CC928D /* BaiduUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9A9E16E858CA00CC928D /* BaiduUtility.m */; };
+		505E9AAD16E8590800CC928D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AAC16E8590800CC928D /* JSONKit.m */; };
+		505E9AAF16E86A6000CC928D /* SinaWeibo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AAE16E86A6000CC928D /* SinaWeibo.bundle */; };
+		505E9AB916E87B1500CC928D /* KuaiPanOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505E9AB116E87B1500CC928D /* KuaiPanOpenAPI.framework */; };
+		505E9ABA16E87B1500CC928D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AB316E87B1500CC928D /* background.png */; };
+		505E9ABB16E87B1500CC928D /* KPAuthController_ipad.nib in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AB416E87B1500CC928D /* KPAuthController_ipad.nib */; };
+		505E9ABC16E87B1500CC928D /* KPAuthController_iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AB516E87B1500CC928D /* KPAuthController_iphone.nib */; };
+		505E9ABD16E87B1500CC928D /* KPRegisterAuthController_ipad.nib in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AB616E87B1500CC928D /* KPRegisterAuthController_ipad.nib */; };
+		505E9ABE16E87B1500CC928D /* KPRegisterAuthController_iphone.nib in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AB716E87B1500CC928D /* KPRegisterAuthController_iphone.nib */; };
+		505E9ABF16E87B1500CC928D /* KuaiPanOpenAPI.zip in Resources */ = {isa = PBXBuildFile; fileRef = 505E9AB816E87B1500CC928D /* KuaiPanOpenAPI.zip */; };
+		505E9AC616E8928600CC928D /* MainViewControllerBdisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AC116E8928600CC928D /* MainViewControllerBdisk.m */; };
+		505E9AC716E8928600CC928D /* MainViewControllerKdisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AC316E8928600CC928D /* MainViewControllerKdisk.m */; };
+		505E9AC816E8928600CC928D /* MainViewControllerVdisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AC516E8928600CC928D /* MainViewControllerVdisk.m */; };
+		509E413716F074A80022C246 /* BdiskReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509E413416F074A80022C246 /* BdiskReaderViewController.m */; };
+		509E413816F074A80022C246 /* KdiskReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509E413616F074A80022C246 /* KdiskReaderViewController.m */; };
+		50F1EC0816EEFD220099AE1F /* VdiskReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1EC0716EEFD220099AE1F /* VdiskReaderViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		503A4E0B16E5CB6600B2CC3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 503A4E0716E5CB6600B2CC3A /* VdiskSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3FA18FB0158F43D0002FF989;
+			remoteInfo = "VdiskSDK-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5032582816F2EF33005F468B /* BdiskDirectoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BdiskDirectoryInfo.h; sourceTree = "<group>"; };
+		5032582916F2EF33005F468B /* BdiskDirectoryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BdiskDirectoryInfo.m; sourceTree = "<group>"; };
+		5032582C16F2EF4F005F468B /* BdiskFileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BdiskFileInfo.h; sourceTree = "<group>"; };
+		5032582D16F2EF4F005F468B /* BdiskFileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BdiskFileInfo.m; sourceTree = "<group>"; };
+		5036C7BE16E98CB30000661B /* KPAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPAuthViewController.h; sourceTree = "<group>"; };
+		5036C7BF16E98CB30000661B /* KPAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPAuthViewController.m; sourceTree = "<group>"; };
+		5038F63A16F1E65200B76463 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		5038F63B16F1E65200B76463 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		503A4E0716E5CB6600B2CC3A /* VdiskSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VdiskSDK.xcodeproj; path = ../svn/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK.xcodeproj; sourceTree = "<group>"; };
+		503A4E1516E5CF7500B2CC3A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		50589D1916E08C140093F832 /* CloudDiskTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudDiskTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50589D1C16E08C140093F832 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		50589D1E16E08C140093F832 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		50589D2016E08C140093F832 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		50589D2416E08C140093F832 /* CloudDiskTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CloudDiskTest-Info.plist"; sourceTree = "<group>"; };
+		50589D2616E08C140093F832 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		50589D2816E08C140093F832 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		50589D2A16E08C140093F832 /* CloudDiskTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudDiskTest-Prefix.pch"; sourceTree = "<group>"; };
+		50589D2B16E08C140093F832 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		50589D2C16E08C140093F832 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		50589D2E16E08C140093F832 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		50589D3016E08C140093F832 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		50589D3216E08C140093F832 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		50589D3A16E0901A0093F832 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		50589D3C16E0904B0093F832 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		50589D3E16E0905A0093F832 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		50589D4016E0906A0093F832 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		50589D4216E0907D0093F832 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		50589D4416E090890093F832 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		50589D4616E090960093F832 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		50589D4916E09A840093F832 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		50589D4A16E09A840093F832 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		5058A26916E09E060093F832 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		5058A26F16E0C4F00093F832 /* bb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bb.jpg; sourceTree = "<group>"; };
+		5058A27B16E0CBA80093F832 /* kk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kk@2x.png"; sourceTree = "<group>"; };
+		505E9A8916E858C900CC928D /* Baidu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Baidu.h; sourceTree = "<group>"; };
+		505E9A8A16E858C900CC928D /* Baidu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Baidu.m; sourceTree = "<group>"; };
+		505E9A8B16E858C900CC928D /* BaiduAPIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduAPIRequest.h; sourceTree = "<group>"; };
+		505E9A8C16E858C900CC928D /* BaiduAPIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduAPIRequest.m; sourceTree = "<group>"; };
+		505E9A8D16E858C900CC928D /* BaiduAuthorizeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduAuthorizeManager.h; sourceTree = "<group>"; };
+		505E9A8E16E858C900CC928D /* BaiduAuthorizeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduAuthorizeManager.m; sourceTree = "<group>"; };
+		505E9A8F16E858C900CC928D /* BaiduAuthorizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduAuthorizeViewController.h; sourceTree = "<group>"; };
+		505E9A9016E858CA00CC928D /* BaiduAuthorizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduAuthorizeViewController.m; sourceTree = "<group>"; };
+		505E9A9116E858CA00CC928D /* BaiduBaseNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduBaseNavigationViewController.h; sourceTree = "<group>"; };
+		505E9A9216E858CA00CC928D /* BaiduBaseNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduBaseNavigationViewController.m; sourceTree = "<group>"; };
+		505E9A9316E858CA00CC928D /* BaiduConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduConfig.h; sourceTree = "<group>"; };
+		505E9A9416E858CA00CC928D /* BaiduConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduConfig.m; sourceTree = "<group>"; };
+		505E9A9516E858CA00CC928D /* BaiduDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduDelegate.h; sourceTree = "<group>"; };
+		505E9A9616E858CA00CC928D /* BaiduError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduError.h; sourceTree = "<group>"; };
+		505E9A9716E858CA00CC928D /* BaiduError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduError.m; sourceTree = "<group>"; };
+		505E9A9816E858CA00CC928D /* BaiduMacroDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMacroDef.h; sourceTree = "<group>"; };
+		505E9A9916E858CA00CC928D /* BaiduUserSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduUserSession.h; sourceTree = "<group>"; };
+		505E9A9A16E858CA00CC928D /* BaiduUserSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduUserSession.m; sourceTree = "<group>"; };
+		505E9A9B16E858CA00CC928D /* BaiduUserSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduUserSessionManager.h; sourceTree = "<group>"; };
+		505E9A9C16E858CA00CC928D /* BaiduUserSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduUserSessionManager.m; sourceTree = "<group>"; };
+		505E9A9D16E858CA00CC928D /* BaiduUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduUtility.h; sourceTree = "<group>"; };
+		505E9A9E16E858CA00CC928D /* BaiduUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduUtility.m; sourceTree = "<group>"; };
+		505E9AAB16E8590800CC928D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		505E9AAC16E8590800CC928D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		505E9AAE16E86A6000CC928D /* SinaWeibo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SinaWeibo.bundle; sourceTree = "<group>"; };
+		505E9AB116E87B1500CC928D /* KuaiPanOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KuaiPanOpenAPI.framework; sourceTree = "<group>"; };
+		505E9AB316E87B1500CC928D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		505E9AB416E87B1500CC928D /* KPAuthController_ipad.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = KPAuthController_ipad.nib; sourceTree = "<group>"; };
+		505E9AB516E87B1500CC928D /* KPAuthController_iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = KPAuthController_iphone.nib; sourceTree = "<group>"; };
+		505E9AB616E87B1500CC928D /* KPRegisterAuthController_ipad.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = KPRegisterAuthController_ipad.nib; sourceTree = "<group>"; };
+		505E9AB716E87B1500CC928D /* KPRegisterAuthController_iphone.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = KPRegisterAuthController_iphone.nib; sourceTree = "<group>"; };
+		505E9AB816E87B1500CC928D /* KuaiPanOpenAPI.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = KuaiPanOpenAPI.zip; sourceTree = "<group>"; };
+		505E9AC016E8928600CC928D /* MainViewControllerBdisk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewControllerBdisk.h; sourceTree = "<group>"; };
+		505E9AC116E8928600CC928D /* MainViewControllerBdisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewControllerBdisk.m; sourceTree = "<group>"; };
+		505E9AC216E8928600CC928D /* MainViewControllerKdisk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewControllerKdisk.h; sourceTree = "<group>"; };
+		505E9AC316E8928600CC928D /* MainViewControllerKdisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewControllerKdisk.m; sourceTree = "<group>"; };
+		505E9AC416E8928600CC928D /* MainViewControllerVdisk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewControllerVdisk.h; sourceTree = "<group>"; };
+		505E9AC516E8928600CC928D /* MainViewControllerVdisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewControllerVdisk.m; sourceTree = "<group>"; };
+		5081C2D016EDAE570027F2AF /* BaiduSDKHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduSDKHeader.h; sourceTree = "<group>"; };
+		509E413316F074A80022C246 /* BdiskReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BdiskReaderViewController.h; sourceTree = "<group>"; };
+		509E413416F074A80022C246 /* BdiskReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BdiskReaderViewController.m; sourceTree = "<group>"; };
+		509E413516F074A80022C246 /* KdiskReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KdiskReaderViewController.h; sourceTree = "<group>"; };
+		509E413616F074A80022C246 /* KdiskReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KdiskReaderViewController.m; sourceTree = "<group>"; };
+		50F1EC0616EEFD220099AE1F /* VdiskReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VdiskReaderViewController.h; sourceTree = "<group>"; };
+		50F1EC0716EEFD220099AE1F /* VdiskReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VdiskReaderViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50589D1616E08C140093F832 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				503A4E1A16E5D5D300B2CC3A /* libVdiskSDK-iOS.a in Frameworks */,
+				503A4E1616E5CF7500B2CC3A /* CoreFoundation.framework in Frameworks */,
+				50589D4716E090960093F832 /* libz.dylib in Frameworks */,
+				50589D4516E090890093F832 /* Security.framework in Frameworks */,
+				50589D4316E0907D0093F832 /* AssetsLibrary.framework in Frameworks */,
+				50589D4116E0906A0093F832 /* SystemConfiguration.framework in Frameworks */,
+				50589D3F16E0905A0093F832 /* CFNetwork.framework in Frameworks */,
+				50589D3D16E0904B0093F832 /* MobileCoreServices.framework in Frameworks */,
+				50589D3B16E0901A0093F832 /* QuartzCore.framework in Frameworks */,
+				50589D1D16E08C140093F832 /* UIKit.framework in Frameworks */,
+				50589D1F16E08C140093F832 /* Foundation.framework in Frameworks */,
+				50589D2116E08C140093F832 /* CoreGraphics.framework in Frameworks */,
+				505E9AB916E87B1500CC928D /* KuaiPanOpenAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		503A4E0816E5CB6600B2CC3A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				503A4E0C16E5CB6600B2CC3A /* libVdiskSDK-iOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50589D1016E08C140093F832 = {
+			isa = PBXGroup;
+			children = (
+				503A4E0716E5CB6600B2CC3A /* VdiskSDK.xcodeproj */,
+				505E9AAA16E8590800CC928D /* JSON */,
+				505E9A8816E858C900CC928D /* BaiduSDK */,
+				50589D2216E08C140093F832 /* CloudDiskTest */,
+				50589D1B16E08C140093F832 /* Frameworks */,
+				50589D1A16E08C140093F832 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		50589D1A16E08C140093F832 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50589D1916E08C140093F832 /* CloudDiskTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50589D1B16E08C140093F832 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				505E9AB016E87B1500CC928D /* KuaiPanOpenAPI.kpframework */,
+				50589D4616E090960093F832 /* libz.dylib */,
+				503A4E1516E5CF7500B2CC3A /* CoreFoundation.framework */,
+				50589D4416E090890093F832 /* Security.framework */,
+				50589D4216E0907D0093F832 /* AssetsLibrary.framework */,
+				50589D4016E0906A0093F832 /* SystemConfiguration.framework */,
+				50589D3E16E0905A0093F832 /* CFNetwork.framework */,
+				50589D3C16E0904B0093F832 /* MobileCoreServices.framework */,
+				50589D3A16E0901A0093F832 /* QuartzCore.framework */,
+				50589D1C16E08C140093F832 /* UIKit.framework */,
+				50589D1E16E08C140093F832 /* Foundation.framework */,
+				50589D2016E08C140093F832 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50589D2216E08C140093F832 /* CloudDiskTest */ = {
+			isa = PBXGroup;
+			children = (
+				5032582816F2EF33005F468B /* BdiskDirectoryInfo.h */,
+				5032582916F2EF33005F468B /* BdiskDirectoryInfo.m */,
+				5032582C16F2EF4F005F468B /* BdiskFileInfo.h */,
+				5032582D16F2EF4F005F468B /* BdiskFileInfo.m */,
+				5038F63A16F1E65200B76463 /* MBProgressHUD.h */,
+				5038F63B16F1E65200B76463 /* MBProgressHUD.m */,
+				50589D2B16E08C140093F832 /* AppDelegate.h */,
+				50589D2C16E08C140093F832 /* AppDelegate.m */,
+				50589D4916E09A840093F832 /* RootViewController.h */,
+				50589D4A16E09A840093F832 /* RootViewController.m */,
+				5081C2D016EDAE570027F2AF /* BaiduSDKHeader.h */,
+				505E9AC016E8928600CC928D /* MainViewControllerBdisk.h */,
+				505E9AC116E8928600CC928D /* MainViewControllerBdisk.m */,
+				505E9AC216E8928600CC928D /* MainViewControllerKdisk.h */,
+				505E9AC316E8928600CC928D /* MainViewControllerKdisk.m */,
+				505E9AC416E8928600CC928D /* MainViewControllerVdisk.h */,
+				505E9AC516E8928600CC928D /* MainViewControllerVdisk.m */,
+				5036C7BE16E98CB30000661B /* KPAuthViewController.h */,
+				5036C7BF16E98CB30000661B /* KPAuthViewController.m */,
+				50F1EC0616EEFD220099AE1F /* VdiskReaderViewController.h */,
+				50F1EC0716EEFD220099AE1F /* VdiskReaderViewController.m */,
+				509E413316F074A80022C246 /* BdiskReaderViewController.h */,
+				509E413416F074A80022C246 /* BdiskReaderViewController.m */,
+				509E413516F074A80022C246 /* KdiskReaderViewController.h */,
+				509E413616F074A80022C246 /* KdiskReaderViewController.m */,
+				50589D2316E08C140093F832 /* Supporting Files */,
+			);
+			path = CloudDiskTest;
+			sourceTree = "<group>";
+		};
+		50589D2316E08C140093F832 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5058A26816E09E060093F832 /* Images */,
+				50589D2416E08C140093F832 /* CloudDiskTest-Info.plist */,
+				50589D2516E08C140093F832 /* InfoPlist.strings */,
+				50589D2816E08C140093F832 /* main.m */,
+				50589D2A16E08C140093F832 /* CloudDiskTest-Prefix.pch */,
+				50589D2E16E08C140093F832 /* Default.png */,
+				50589D3016E08C140093F832 /* Default@2x.png */,
+				50589D3216E08C140093F832 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5058A26816E09E060093F832 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				505E9AAE16E86A6000CC928D /* SinaWeibo.bundle */,
+				5058A26F16E0C4F00093F832 /* bb.jpg */,
+				5058A27B16E0CBA80093F832 /* kk@2x.png */,
+				5058A26916E09E060093F832 /* Icon@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		505E9A8816E858C900CC928D /* BaiduSDK */ = {
+			isa = PBXGroup;
+			children = (
+				505E9A8916E858C900CC928D /* Baidu.h */,
+				505E9A8A16E858C900CC928D /* Baidu.m */,
+				505E9A8B16E858C900CC928D /* BaiduAPIRequest.h */,
+				505E9A8C16E858C900CC928D /* BaiduAPIRequest.m */,
+				505E9A8D16E858C900CC928D /* BaiduAuthorizeManager.h */,
+				505E9A8E16E858C900CC928D /* BaiduAuthorizeManager.m */,
+				505E9A8F16E858C900CC928D /* BaiduAuthorizeViewController.h */,
+				505E9A9016E858CA00CC928D /* BaiduAuthorizeViewController.m */,
+				505E9A9116E858CA00CC928D /* BaiduBaseNavigationViewController.h */,
+				505E9A9216E858CA00CC928D /* BaiduBaseNavigationViewController.m */,
+				505E9A9316E858CA00CC928D /* BaiduConfig.h */,
+				505E9A9416E858CA00CC928D /* BaiduConfig.m */,
+				505E9A9516E858CA00CC928D /* BaiduDelegate.h */,
+				505E9A9616E858CA00CC928D /* BaiduError.h */,
+				505E9A9716E858CA00CC928D /* BaiduError.m */,
+				505E9A9816E858CA00CC928D /* BaiduMacroDef.h */,
+				505E9A9916E858CA00CC928D /* BaiduUserSession.h */,
+				505E9A9A16E858CA00CC928D /* BaiduUserSession.m */,
+				505E9A9B16E858CA00CC928D /* BaiduUserSessionManager.h */,
+				505E9A9C16E858CA00CC928D /* BaiduUserSessionManager.m */,
+				505E9A9D16E858CA00CC928D /* BaiduUtility.h */,
+				505E9A9E16E858CA00CC928D /* BaiduUtility.m */,
+			);
+			path = BaiduSDK;
+			sourceTree = "<group>";
+		};
+		505E9AAA16E8590800CC928D /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				505E9AAB16E8590800CC928D /* JSONKit.h */,
+				505E9AAC16E8590800CC928D /* JSONKit.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		505E9AB016E87B1500CC928D /* KuaiPanOpenAPI.kpframework */ = {
+			isa = PBXGroup;
+			children = (
+				505E9AB116E87B1500CC928D /* KuaiPanOpenAPI.framework */,
+				505E9AB216E87B1500CC928D /* Resources */,
+			);
+			path = KuaiPanOpenAPI.kpframework;
+			sourceTree = "<group>";
+		};
+		505E9AB216E87B1500CC928D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				505E9AB316E87B1500CC928D /* background.png */,
+				505E9AB416E87B1500CC928D /* KPAuthController_ipad.nib */,
+				505E9AB516E87B1500CC928D /* KPAuthController_iphone.nib */,
+				505E9AB616E87B1500CC928D /* KPRegisterAuthController_ipad.nib */,
+				505E9AB716E87B1500CC928D /* KPRegisterAuthController_iphone.nib */,
+				505E9AB816E87B1500CC928D /* KuaiPanOpenAPI.zip */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50589D1816E08C140093F832 /* CloudDiskTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50589D3616E08C140093F832 /* Build configuration list for PBXNativeTarget "CloudDiskTest" */;
+			buildPhases = (
+				50589D1516E08C140093F832 /* Sources */,
+				50589D1616E08C140093F832 /* Frameworks */,
+				50589D1716E08C140093F832 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CloudDiskTest;
+			productName = CloudDiskTest;
+			productReference = 50589D1916E08C140093F832 /* CloudDiskTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50589D1116E08C140093F832 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Littlebox;
+			};
+			buildConfigurationList = 50589D1416E08C140093F832 /* Build configuration list for PBXProject "CloudDiskTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 50589D1016E08C140093F832;
+			productRefGroup = 50589D1A16E08C140093F832 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 503A4E0816E5CB6600B2CC3A /* Products */;
+					ProjectRef = 503A4E0716E5CB6600B2CC3A /* VdiskSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				50589D1816E08C140093F832 /* CloudDiskTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		503A4E0C16E5CB6600B2CC3A /* libVdiskSDK-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libVdiskSDK-iOS.a";
+			remoteRef = 503A4E0B16E5CB6600B2CC3A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50589D1716E08C140093F832 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50589D2716E08C140093F832 /* InfoPlist.strings in Resources */,
+				50589D2F16E08C140093F832 /* Default.png in Resources */,
+				50589D3116E08C140093F832 /* Default@2x.png in Resources */,
+				50589D3316E08C140093F832 /* Default-568h@2x.png in Resources */,
+				5058A26A16E09E060093F832 /* Icon@2x.png in Resources */,
+				5058A27016E0C4F00093F832 /* bb.jpg in Resources */,
+				5058A27C16E0CBA80093F832 /* kk@2x.png in Resources */,
+				505E9AAF16E86A6000CC928D /* SinaWeibo.bundle in Resources */,
+				505E9ABA16E87B1500CC928D /* background.png in Resources */,
+				505E9ABB16E87B1500CC928D /* KPAuthController_ipad.nib in Resources */,
+				505E9ABC16E87B1500CC928D /* KPAuthController_iphone.nib in Resources */,
+				505E9ABD16E87B1500CC928D /* KPRegisterAuthController_ipad.nib in Resources */,
+				505E9ABE16E87B1500CC928D /* KPRegisterAuthController_iphone.nib in Resources */,
+				505E9ABF16E87B1500CC928D /* KuaiPanOpenAPI.zip in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50589D1516E08C140093F832 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50589D2916E08C140093F832 /* main.m in Sources */,
+				50589D2D16E08C140093F832 /* AppDelegate.m in Sources */,
+				503A4E1816E5D4B600B2CC3A /* RootViewController.m in Sources */,
+				505E9A9F16E858CA00CC928D /* Baidu.m in Sources */,
+				505E9AA016E858CA00CC928D /* BaiduAPIRequest.m in Sources */,
+				505E9AA116E858CA00CC928D /* BaiduAuthorizeManager.m in Sources */,
+				505E9AA216E858CA00CC928D /* BaiduAuthorizeViewController.m in Sources */,
+				505E9AA316E858CA00CC928D /* BaiduBaseNavigationViewController.m in Sources */,
+				505E9AA416E858CA00CC928D /* BaiduConfig.m in Sources */,
+				505E9AA516E858CA00CC928D /* BaiduError.m in Sources */,
+				505E9AA616E858CA00CC928D /* BaiduUserSession.m in Sources */,
+				505E9AA716E858CA00CC928D /* BaiduUserSessionManager.m in Sources */,
+				505E9AA816E858CA00CC928D /* BaiduUtility.m in Sources */,
+				505E9AAD16E8590800CC928D /* JSONKit.m in Sources */,
+				505E9AC616E8928600CC928D /* MainViewControllerBdisk.m in Sources */,
+				505E9AC716E8928600CC928D /* MainViewControllerKdisk.m in Sources */,
+				505E9AC816E8928600CC928D /* MainViewControllerVdisk.m in Sources */,
+				5036C7C016E98CB30000661B /* KPAuthViewController.m in Sources */,
+				50F1EC0816EEFD220099AE1F /* VdiskReaderViewController.m in Sources */,
+				509E413716F074A80022C246 /* BdiskReaderViewController.m in Sources */,
+				509E413816F074A80022C246 /* KdiskReaderViewController.m in Sources */,
+				5038F63C16F1E65200B76463 /* MBProgressHUD.m in Sources */,
+				5032582A16F2EF33005F468B /* BdiskDirectoryInfo.m in Sources */,
+				5032582E16F2EF4F005F468B /* BdiskFileInfo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		50589D2516E08C140093F832 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50589D2616E08C140093F832 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50589D3416E08C140093F832 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		50589D3516E08C140093F832 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50589D3716E08C140093F832 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/KuaiPanOpenAPI.kpframework\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudDiskTest/CloudDiskTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/Users/Littlebox/workspace/svn/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK/**";
+				INFOPLIST_FILE = "CloudDiskTest/CloudDiskTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		50589D3816E08C140093F832 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/KuaiPanOpenAPI.kpframework\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CloudDiskTest/CloudDiskTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/Users/Littlebox/workspace/svn/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK/**";
+				INFOPLIST_FILE = "CloudDiskTest/CloudDiskTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50589D1416E08C140093F832 /* Build configuration list for PBXProject "CloudDiskTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50589D3416E08C140093F832 /* Debug */,
+				50589D3516E08C140093F832 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50589D3616E08C140093F832 /* Build configuration list for PBXNativeTarget "CloudDiskTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50589D3716E08C140093F832 /* Debug */,
+				50589D3816E08C140093F832 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50589D1116E08C140093F832 /* Project object */;
+}
