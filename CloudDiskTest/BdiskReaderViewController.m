@@ -50,6 +50,7 @@
         _progress = 0.0f;
         
         _clog = [[CLog alloc] init];
+        [_clog setCustomKeys:kLogCustomType];
     }
     return self;
 }
@@ -228,8 +229,11 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-    
+
+    [_clog setHttpBytesDown:[NSString stringWithFormat:@"%llu", [request contentLength]]];
+    [_clog setCustomKeys:@[@"app_name", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @""]];
     [_clog stopRecordTime];
+    
     DDLogInfo(@"%@", _clog);
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -260,6 +264,8 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
+    
+    [_clog setCustomKeys:@[@"app_name", @"error_code"] andValues:@[kLogAppNameBaiduDisk, [NSString stringWithFormat:@"%d", request.error.code]]];
     [_clog stopRecordTime];
     DDLogInfo(@"%@", _clog);
     
