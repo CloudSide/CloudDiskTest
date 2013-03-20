@@ -143,7 +143,7 @@
             
             NSString *access_token = [BaiduUserSessionManager shareUserSessionManager].currentUserSession.accessToken;
             
-            NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=download&access_token=%@&path=%@", access_token, _metadata.filePath];
+            NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=download&access_token=%@&path=%@", access_token, [_metadata.filePath URLEncodedString]];
             
             NSString *httpMethodText = @"GET";
             
@@ -151,7 +151,7 @@
                 [_request cancel];
             }
             
-            requestText = [requestText stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8)];
+            //requestText = [requestText stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8)];
             NSURL *requestUrl = [NSURL URLWithString:requestText];
             
             _request = [[ASIHTTPRequest requestWithURL:requestUrl] retain];
@@ -230,36 +230,46 @@
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
 
-    [_clog setHttpBytesDown:[NSString stringWithFormat:@"%llu", [request contentLength]]];
-    [_clog setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"download", @""]];
-    [_clog stopRecordTime];
+    if ([request responseStatusCode] / 100 == 2) {
     
-    DDLogInfo(@"%@", _clog);
+        [_clog setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"download", @""]];
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+        NSString *tmpDirectory = [NSString stringWithFormat:@"%@/bdisk/0/download/%@", documentsDirectoryPath, _metadata.fileMd5];
+        NSString *tmpPath = [NSString stringWithFormat:@"%@/%@", tmpDirectory, _metadata.fileName];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        if ([fileManager fileExistsAtPath:tmpPath]) {
+            
+            UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+            
+            webView.delegate = self;
+            webView.scalesPageToFit = YES;
+            
+            NSURL *targetURL = [NSURL fileURLWithPath:tmpPath];
+            NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+            
+            [webView loadRequest:request];
+            
+            [self.view addSubview:webView];
+            [webView release];
+            
+            [self.view setNeedsDisplay];
+        }
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectoryPath = [paths objectAtIndex:0];
-    NSString *tmpDirectory = [NSString stringWithFormat:@"%@/bdisk/0/download/%@", documentsDirectoryPath, _metadata.fileMd5];
-    NSString *tmpPath = [NSString stringWithFormat:@"%@/%@", tmpDirectory, _metadata.fileName];
+    } else {
     
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if ([fileManager fileExistsAtPath:tmpPath]) {
-
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [_clog setCustomKeys:@[@"app_name", @"action", @"error_code"] andValues:@[kLogAppNameBaiduDisk, @"download", [NSString stringWithFormat:@"%d", [request responseStatusCode]]]];
         
-        webView.delegate = self;
-        webView.scalesPageToFit = YES;
-        
-        NSURL *targetURL = [NSURL fileURLWithPath:tmpPath];
-        NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-        
-        [webView loadRequest:request];
-        
-        [self.view addSubview:webView];
-        [webView release];
-        
-        [self.view setNeedsDisplay];
+        NSError *error = [request error];
+        NSLog(@"%@", error);
     }
+    
+    [_clog setHttpBytesDown:[NSString stringWithFormat:@"%llu", [request contentLength]]];
+    [_clog stopRecordTime];
+    DDLogInfo(@"%@", _clog);
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

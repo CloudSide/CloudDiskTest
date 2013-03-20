@@ -161,7 +161,7 @@
     
     NSString *access_token = [BaiduUserSessionManager shareUserSessionManager].currentUserSession.accessToken;
     
-    NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=list&access_token=%@&path=%@", access_token, path];
+    NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=list&access_token=%@&path=%@", access_token, [path URLEncodedString]];
     
     NSString *httpMethodText = @"GET";
     
@@ -327,13 +327,13 @@
             
             NSString *destPath = [NSString stringWithFormat:@"%@%@", _currentPath, fileName];
             NSString *access_token = [BaiduUserSessionManager shareUserSessionManager].currentUserSession.accessToken;
-            NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=upload&path=%@&access_token=%@", destPath, access_token];
+            NSString *requestText = [NSString stringWithFormat:@"https://pcs.baidu.com/rest/2.0/pcs/file?method=upload&path=%@&access_token=%@&ondup=overwrite", [destPath URLEncodedString], access_token];
             requestText = [requestText stringByAddingPercentEscapesUsingEncoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingUTF8)];
             
             NSString *httpMethodText = @"POST";
             
             NSURL *requestUrl = [NSURL URLWithString:requestText];
-            _request = [[ASIFormDataRequest requestWithURL:requestUrl] retain];
+            self.request = [ASIFormDataRequest requestWithURL:requestUrl];
             [_request setRequestMethod:httpMethodText];
             
             [_request setFile:tmpPath forKey:@"file"];
@@ -436,21 +436,40 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
+    
+    NSLog(@"[request responseStatusCode]: %d", [request responseStatusCode]);
+    NSLog(@"[request responseString]: %@", [request responseString]);
+    
+    
+    if ([request responseStatusCode] / 100 == 2) {
+      
+        _hud.mode = MBProgressHUDModeText;
+        _hud.labelText = @"上传成功！";
+        _hud.detailsLabelText = nil;
+        
+        [_hud hide:YES afterDelay:1];
+        [_hud show:NO];
+        
+        [self onRefreshButtonPressed:nil];
+        
+        
+    } else {
+    
+        _hud.mode = MBProgressHUDModeText;
+        _hud.labelText = @"上传失败...";
+        _hud.detailsLabelText = nil;
+        
+        [_hud hide:YES afterDelay:1];
+        [_hud show:NO];
+    }
+    
+    
     [_clog stopRecordTime];
+    
     DDLogInfo(@"%@", _clog);
-    
-    _hud.mode = MBProgressHUDModeText;
-    _hud.labelText = @"上传成功！";
-    _hud.detailsLabelText = nil;
-    
-    [_hud hide:YES afterDelay:1];
-    [_hud show:NO];
-    
-    [self onRefreshButtonPressed:nil];
     
     //delete tmp file
     [[NSFileManager defaultManager] removeItemAtPath:_deletePath error:nil];
-
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
