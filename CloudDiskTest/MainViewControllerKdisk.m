@@ -160,6 +160,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    if (!_authController.isAlreadAuth) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
     [self.navigationController setToolbarHidden:NO animated:YES];
     [super viewWillAppear:animated];
 }

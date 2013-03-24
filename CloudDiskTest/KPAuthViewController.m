@@ -57,7 +57,7 @@
     
     if (!self.isAlreadAuth) {
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        //[self.navigationController popToRootViewControllerAnimated:YES];
         
     } else {
         
