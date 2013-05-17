@@ -29,7 +29,6 @@
 		50589D4116E0906A0093F832 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4016E0906A0093F832 /* SystemConfiguration.framework */; };
 		50589D4316E0907D0093F832 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4216E0907D0093F832 /* AssetsLibrary.framework */; };
 		50589D4516E090890093F832 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4416E090890093F832 /* Security.framework */; };
-		50589D4716E090960093F832 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50589D4616E090960093F832 /* libz.dylib */; };
 		5058A26A16E09E060093F832 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5058A26916E09E060093F832 /* Icon@2x.png */; };
 		5058A27016E0C4F00093F832 /* bb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5058A26F16E0C4F00093F832 /* bb.jpg */; };
 		5058A27C16E0CBA80093F832 /* kk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5058A27B16E0CBA80093F832 /* kk@2x.png */; };
@@ -55,6 +54,9 @@
 		505E9AC616E8928600CC928D /* MainViewControllerBdisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AC116E8928600CC928D /* MainViewControllerBdisk.m */; };
 		505E9AC716E8928600CC928D /* MainViewControllerKdisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AC316E8928600CC928D /* MainViewControllerKdisk.m */; };
 		505E9AC816E8928600CC928D /* MainViewControllerVdisk.m in Sources */ = {isa = PBXBuildFile; fileRef = 505E9AC516E8928600CC928D /* MainViewControllerVdisk.m */; };
+		50617CA91745DEBA001DE667 /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50617CA81745DEBA001DE667 /* TaskViewController.m */; };
+		509AA33D1744858D00CFC1F1 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 509AA33C1744858D00CFC1F1 /* libz.1.dylib */; };
+		509AA3421744DFC000CFC1F1 /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509AA3411744DFC000CFC1F1 /* TaskListViewController.m */; };
 		509E413716F074A80022C246 /* BdiskReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509E413416F074A80022C246 /* BdiskReaderViewController.m */; };
 		509E413816F074A80022C246 /* KdiskReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509E413616F074A80022C246 /* KdiskReaderViewController.m */; };
 		50F1EC0816EEFD220099AE1F /* VdiskReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1EC0716EEFD220099AE1F /* VdiskReaderViewController.m */; };
@@ -143,8 +145,13 @@
 		505E9AC316E8928600CC928D /* MainViewControllerKdisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewControllerKdisk.m; sourceTree = "<group>"; };
 		505E9AC416E8928600CC928D /* MainViewControllerVdisk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewControllerVdisk.h; sourceTree = "<group>"; };
 		505E9AC516E8928600CC928D /* MainViewControllerVdisk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewControllerVdisk.m; sourceTree = "<group>"; };
+		50617CA71745DEBA001DE667 /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
+		50617CA81745DEBA001DE667 /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		5067A63B16F989510021326B /* VdiskSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VdiskSDK.xcodeproj; path = ../svn/vdisk/ios/sdk/2/VdiskSDK/VdiskSDK/VdiskSDK.xcodeproj; sourceTree = "<group>"; };
 		5081C2D016EDAE570027F2AF /* BaiduSDKHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduSDKHeader.h; sourceTree = "<group>"; };
+		509AA33C1744858D00CFC1F1 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
+		509AA3401744DFC000CFC1F1 /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
+		509AA3411744DFC000CFC1F1 /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		509E413316F074A80022C246 /* BdiskReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BdiskReaderViewController.h; sourceTree = "<group>"; };
 		509E413416F074A80022C246 /* BdiskReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BdiskReaderViewController.m; sourceTree = "<group>"; };
 		509E413516F074A80022C246 /* KdiskReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KdiskReaderViewController.h; sourceTree = "<group>"; };
@@ -158,9 +165,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509AA33D1744858D00CFC1F1 /* libz.1.dylib in Frameworks */,
 				3F70DF1016F9944000535903 /* libVdiskSDK-iOS.a in Frameworks */,
 				503A4E1616E5CF7500B2CC3A /* CoreFoundation.framework in Frameworks */,
-				50589D4716E090960093F832 /* libz.dylib in Frameworks */,
 				50589D4516E090890093F832 /* Security.framework in Frameworks */,
 				50589D4316E0907D0093F832 /* AssetsLibrary.framework in Frameworks */,
 				50589D4116E0906A0093F832 /* SystemConfiguration.framework in Frameworks */,
@@ -180,6 +187,7 @@
 		50589D1016E08C140093F832 = {
 			isa = PBXGroup;
 			children = (
+				509AA33C1744858D00CFC1F1 /* libz.1.dylib */,
 				5067A63B16F989510021326B /* VdiskSDK.xcodeproj */,
 				505E9AAA16E8590800CC928D /* JSON */,
 				505E9A8816E858C900CC928D /* BaiduSDK */,
@@ -229,6 +237,10 @@
 				50589D2C16E08C140093F832 /* AppDelegate.m */,
 				50589D4916E09A840093F832 /* RootViewController.h */,
 				50589D4A16E09A840093F832 /* RootViewController.m */,
+				509AA3401744DFC000CFC1F1 /* TaskListViewController.h */,
+				509AA3411744DFC000CFC1F1 /* TaskListViewController.m */,
+				50617CA71745DEBA001DE667 /* TaskViewController.h */,
+				50617CA81745DEBA001DE667 /* TaskViewController.m */,
 				5081C2D016EDAE570027F2AF /* BaiduSDKHeader.h */,
 				505E9AC016E8928600CC928D /* MainViewControllerBdisk.h */,
 				505E9AC116E8928600CC928D /* MainViewControllerBdisk.m */,
@@ -458,6 +470,8 @@
 				5038F63C16F1E65200B76463 /* MBProgressHUD.m in Sources */,
 				5032582A16F2EF33005F468B /* BdiskDirectoryInfo.m in Sources */,
 				5032582E16F2EF4F005F468B /* BdiskFileInfo.m in Sources */,
+				509AA3421744DFC000CFC1F1 /* TaskListViewController.m in Sources */,
+				50617CA91745DEBA001DE667 /* TaskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +548,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bruce Chen (KKYLDFR684)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/KuaiPanOpenAPI.kpframework\"",
@@ -545,6 +560,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "13D85C09-EF1B-47BC-807C-32F87C7BB5C4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

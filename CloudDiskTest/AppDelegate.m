@@ -10,14 +10,20 @@
 
 #import "RootViewController.h"
 
+#import "TaskViewController.h"
+
 @implementation AppDelegate
 
 @synthesize navigationController = _navigationController;
+
+@synthesize currentViewController = _currentViewController;
 
 - (void)dealloc
 {
     [_window release];
     [_navigationController release];
+    [_currentViewController release];
+    
     [super dealloc];
 }
 
@@ -34,6 +40,8 @@
     
 //    [self.navigationController.navigationBar setHidden:YES];
     
+    _applicationFromBackground = FALSE;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -49,11 +57,18 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    _applicationFromBackground = TRUE;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+
+    if ([_currentViewController isKindOfClass:[TaskViewController class]]) {
+        
+        [(TaskViewController *)_currentViewController viewWillAppear:NO];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

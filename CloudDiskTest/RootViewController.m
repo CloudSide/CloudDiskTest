@@ -13,6 +13,10 @@
 #import "MainViewControllerBdisk.h"
 #import "MainViewControllerKdisk.h"
 
+#import "TaskListViewController.h"
+
+#import "AppDelegate.h"
+
 @interface RootViewController ()
 
 @end
@@ -25,6 +29,12 @@
 @synthesize bDiskBtn = _bDiskBtn;
 @synthesize kDiskBtn = _kDiskBtn;
 
+@synthesize textFieldName = _textFieldName;
+@synthesize textFieldPhone = _textFieldPhone;
+@synthesize signUpButton = _signUpButton;
+@synthesize signOutButton  = _signOutButton;
+@synthesize numTaskToDo = _numTaskToDo;
+
 - (void)dealloc
 {
     [_currentPressedButton release];
@@ -32,6 +42,12 @@
     [_vDiskBtn release];
     [_bDiskBtn release];
     [_kDiskBtn release];
+    
+    [_textFieldName release];
+    [_textFieldPhone release];
+    [_signUpButton release];
+    [_signOutButton release];
+    [_numTaskToDo release];
     
     [super dealloc];
 }
@@ -53,6 +69,11 @@
             [VdiskSession setSharedSession:session];
             [VdiskComplexRequest setNetworkRequestDelegate:self];
         }
+        
+        if (_bdConnect == nil) {
+            
+            self.bdConnect = [[[Baidu alloc] initWithAPIKey:kBaiduApiKey appId:kBaiduAppId] autorelease];
+        }
     }
     return self;
 }
@@ -64,12 +85,35 @@
     //[self.navigationController.navigationBar setHidden:YES];
 	
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:239/255.0f alpha:1];
+    view.backgroundColor = [UIColor colorWithRed:50/255.0f green:50/255.0f blue:50/255.0f alpha:1];
     
+    // 输入框
+    [self createTextFieldAtView:view];
+    
+    // 点背景隐藏键盘
+    view.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTouch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
+    [view addGestureRecognizer:singleTouch];
+    
+    // 按钮
+    _signUpButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_signUpButton setExclusiveTouch:YES];
+    [_signUpButton setTitle:@"登录微盘、百度云" forState:UIControlStateNormal];
+    _signUpButton.frame = CGRectMake(15, 350, 140, 50);
+    [_signUpButton addTarget:self action:@selector(onSignUpButton:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:_signUpButton];
+    
+    _signOutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_signOutButton setTitle:@"注销账号" forState:UIControlStateNormal];
+    _signOutButton.frame = CGRectMake(165, 350, 140, 50);
+    [_signOutButton addTarget:self action:@selector(onSignOutButton:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:_signOutButton];
+    
+    /*
     [self createButton:_vDiskBtn withName:nameVDiskBtn atView:view];
     [self createButton:_bDiskBtn withName:nameBDiskBtn atView:view];
     [self createButton:_kDiskBtn withName:nameKDiskBtn atView:view];
-    
+    */
     [self setTitle:@"网盘选择"];
     
     self.view = view;
@@ -84,13 +128,122 @@
     self.navigationController.toolbarHidden = YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+    AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    objAppDelegate.currentViewController = [self retain];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 
+- (void)createTextFieldAtView:(UIView *)view
+{
+    _textFieldName = [[UITextField alloc] initWithFrame:CGRectMake(40, 220, 240, 40)];
+    [_textFieldName setBorderStyle:UITextBorderStyleRoundedRect];
+    [_textFieldName setBackgroundColor:[UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1]];
+    [_textFieldName setPlaceholder:@"请输入您的名字"];
+    _textFieldName.returnKeyType = UIReturnKeyDone;
+    _textFieldName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _textFieldName.delegate = self;
+    [view addSubview:_textFieldName];
+    
+    _textFieldPhone = [[UITextField alloc] initWithFrame:CGRectMake(40, 270, 240, 40)];
+    [_textFieldPhone setBorderStyle:UITextBorderStyleRoundedRect];
+    [_textFieldPhone setBackgroundColor:[UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1]];
+    [_textFieldPhone setPlaceholder:@"请输入您的电话"];
+    _textFieldPhone.returnKeyType = UIReturnKeyDone;
+    _textFieldPhone.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _textFieldPhone.delegate = self;
+    [view addSubview:_textFieldPhone];
+
+
+    
+    NSString *fileNameLoad = [self filePath:@"userInfo.archiver"];
+    NSData   *dataLoad     = [NSData dataWithContentsOfFile:fileNameLoad];
+    
+    if ([dataLoad length] > 0) {
+        
+        NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:dataLoad];
+        NSString *name  = [unArchiver decodeObjectForKey:@"userName"];
+        NSString *phone = [unArchiver decodeObjectForKey:@"userPhone"];
+        self.numTaskToDo = [unArchiver decodeObjectForKey:@"userNumTaskToDo"];
+        
+        [unArchiver finishDecoding];
+        [unArchiver release];
+        
+        _textFieldName.text = name;
+        _textFieldName.textColor = [UIColor grayColor];
+        [_textFieldName setUserInteractionEnabled:NO];
+        
+        _textFieldPhone.text = phone;
+        _textFieldPhone.textColor = [UIColor grayColor];
+        [_textFieldPhone setUserInteractionEnabled:NO];
+    }
+}
+
+- (void)onSignUpButton:(id)sender {
+    
+    NSString *fileName = [self filePath:@"userInfo.archiver"];
+    NSData   *dataLoad     = [NSData dataWithContentsOfFile:fileName];
+    
+    if ([dataLoad length] > 0) {
+        
+
+    } else {
+        
+        NSMutableData   *data     = [NSMutableData data];
+        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+        
+        self.numTaskToDo = @"5";
+        [archiver encodeObject:self.numTaskToDo forKey:@"userNumTaskToDo"];
+        [archiver encodeObject:self.textFieldName.text forKey:@"userName"];
+        [archiver encodeObject:self.textFieldPhone.text forKey:@"userPhone"];
+        
+        [archiver finishEncoding];
+        [data writeToFile:fileName atomically:YES];
+        [archiver release];
+    }
+    
+    // 登陆
+    if ([[VdiskSession sharedSession] isLinked] && ![[VdiskSession sharedSession] isExpired] && [self.bdConnect isUserSessionValid]) {
+        
+        TaskListViewController *taskListViewController = [[[TaskListViewController alloc] init] autorelease];
+        taskListViewController.bdConnect = self.bdConnect;
+        taskListViewController.numTaskToDo = self.numTaskToDo;
+        [self.navigationController pushViewController:taskListViewController animated:YES];
+        
+    }else {
+        
+        //
+        [self onSignOutButton:nil];
+        [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeDefault];
+        
+        //
+//        [self.bdConnect authorizeWithScope:@"basic,netdisk" andDelegate:self];
+    }
+
+}
+
+- (void)onSignOutButton:(id)sender {
+    
+    [_bdConnect currentUserLogout];
+    [[VdiskSession sharedSession] unlink];
+}
+
+- (NSString *)filePath: (NSString* )fileName {
+    
+    NSArray  *myPaths   = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *myDocPath = [myPaths objectAtIndex:0];
+    NSString *filePath  = [myDocPath stringByAppendingPathComponent:fileName];
+    return filePath;
+}
+
+
+#pragma mark -
 #pragma Button define and function
 
 - (void)createButton:(UIButton *)button withName:(NSString *)name atView:(UIView *)view
@@ -272,8 +425,10 @@ static int outstandingRequests;
     
     @try {
         
-        MainViewControllerVdisk *mainViewControllerVdisk = [[[MainViewControllerVdisk alloc] init] autorelease];
-        [self.navigationController pushViewController:mainViewControllerVdisk animated:YES];
+//        MainViewControllerVdisk *mainViewControllerVdisk = [[[MainViewControllerVdisk alloc] init] autorelease];
+//        [self.navigationController pushViewController:mainViewControllerVdisk animated:YES];
+        
+        [self.bdConnect authorizeWithScope:@"basic,netdisk" andDelegate:self];
         
     } @catch (NSException *exception) {
         
@@ -321,19 +476,74 @@ static int outstandingRequests;
 
 - (void)loginDidSuccess
 {
-    MainViewControllerBdisk *mainViewControllerBdisk = [[[MainViewControllerBdisk alloc] init] autorelease];
-    mainViewControllerBdisk.bdConnect = self.bdConnect;
-    [self.navigationController pushViewController:mainViewControllerBdisk animated:YES];
+//    MainViewControllerBdisk *mainViewControllerBdisk = [[[MainViewControllerBdisk alloc] init] autorelease];
+//    mainViewControllerBdisk.bdConnect = self.bdConnect;
+//    [self.navigationController pushViewController:mainViewControllerBdisk animated:YES];
+    
+    TaskListViewController *taskListViewController = [[[TaskListViewController alloc] init] autorelease];
+    taskListViewController.bdConnect = self.bdConnect;
+    taskListViewController.numTaskToDo = self.numTaskToDo;
+    [self.navigationController pushViewController:taskListViewController animated:YES];
 }
 
 - (void)loginDidCancel
 {
-    
+    [[VdiskSession sharedSession] unlink];
 }
 
 - (void)loginFailedWithError:(NSError *)error
 {
     NSLog(@"%@", error);
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    CGRect frame = textField.frame;
+    int offset = frame.origin.y + 110 - (self.view.frame.size.height - 240);//键盘高度216
+    
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height;
+    
+    if (offset == 160) {
+        offset = 110;
+    }
+    
+    if(offset > 0) {
+        CGRect rect = CGRectMake(0.0f, -offset,width,height);
+        self.view.frame = rect;
+    }
+    [UIView commitAnimations];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    CGRect rect = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = rect;
+    [UIView commitAnimations];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)dismissKeyboard:(id)sender{
+    
+    NSTimeInterval animationDuration = 0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    CGRect rect = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = rect;
+    [UIView commitAnimations];
+    
+    [_textFieldName resignFirstResponder];
+    [_textFieldPhone resignFirstResponder];
 }
 
 @end
