@@ -40,6 +40,9 @@
 #define tagBtnBdisk                                     1002
 #define tagBtnKdisk                                     1003
 
+#define alarmHour                                       14
+#define alarmMinute                                     0
+#define alarmSecond                                     1
 
 #ifndef kBaiduApiKey
 #error

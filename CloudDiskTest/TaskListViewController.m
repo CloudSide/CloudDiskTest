@@ -45,10 +45,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    UILabel * label = [[[UILabel alloc] initWithFrame:CGRectMake(50, 150, 250, 50)] autorelease];
-    label.text = [NSString stringWithFormat:@"本月您还有 %@ 轮任务需要执行", _numTaskToDo];
-    [self.view addSubview:label];
-    
     _startButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_startButton setExclusiveTouch:YES];
     [_startButton setTitle:@"开始新任务" forState:UIControlStateNormal];
@@ -67,6 +63,52 @@
     
     AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     objAppDelegate.currentViewController = [self retain];
+    
+    NSString *fileNameLoad = [self filePath:@"userInfo.archiver"];
+    NSData   *dataLoad     = [NSData dataWithContentsOfFile:fileNameLoad];
+    
+    if ([dataLoad length] > 0) {
+        
+        NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:dataLoad];
+        
+        self.numTaskToDo = [unArchiver decodeObjectForKey:@"userNumTaskToDo"];
+        
+        UILabel * label = [[[UILabel alloc] initWithFrame:CGRectMake(50, 150, 250, 50)] autorelease];
+        label.text = [NSString stringWithFormat:@"本月您还有 %@ 轮任务需要执行", _numTaskToDo];
+        [self.view addSubview:label];
+        
+        [unArchiver finishDecoding];
+        [unArchiver release];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if(objAppDelegate->_applicationFromBackground)
+    {
+        objAppDelegate->_applicationFromBackground = FALSE;
+    
+        NSString *fileNameLoad = [self filePath:@"userInfo.archiver"];
+        NSData   *dataLoad     = [NSData dataWithContentsOfFile:fileNameLoad];
+        
+        if ([dataLoad length] > 0) {
+            
+            NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:dataLoad];
+            
+            self.numTaskToDo = [unArchiver decodeObjectForKey:@"userNumTaskToDo"];
+            
+            UILabel * label = [[[UILabel alloc] initWithFrame:CGRectMake(50, 150, 250, 50)] autorelease];
+            label.text = [NSString stringWithFormat:@"本月您还有 %@ 轮任务需要执行", _numTaskToDo];
+            [self.view addSubview:label];
+            
+            [unArchiver finishDecoding];
+            [unArchiver release];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,5 +132,12 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (NSString *)filePath: (NSString* )fileName {
+    
+    NSArray  *myPaths   = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *myDocPath = [myPaths objectAtIndex:0];
+    NSString *filePath  = [myDocPath stringByAppendingPathComponent:fileName];
+    return filePath;
+}
 
 @end

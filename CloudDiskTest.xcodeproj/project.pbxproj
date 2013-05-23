@@ -101,7 +101,6 @@
 		50589D4016E0906A0093F832 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		50589D4216E0907D0093F832 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		50589D4416E090890093F832 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		50589D4616E090960093F832 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		50589D4916E09A840093F832 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		50589D4A16E09A840093F832 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5058A26916E09E060093F832 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -187,7 +186,6 @@
 		50589D1016E08C140093F832 = {
 			isa = PBXGroup;
 			children = (
-				509AA33C1744858D00CFC1F1 /* libz.1.dylib */,
 				5067A63B16F989510021326B /* VdiskSDK.xcodeproj */,
 				505E9AAA16E8590800CC928D /* JSON */,
 				505E9A8816E858C900CC928D /* BaiduSDK */,
@@ -209,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				505E9AB016E87B1500CC928D /* KuaiPanOpenAPI.kpframework */,
-				50589D4616E090960093F832 /* libz.dylib */,
+				509AA33C1744858D00CFC1F1 /* libz.1.dylib */,
 				503A4E1516E5CF7500B2CC3A /* CoreFoundation.framework */,
 				50589D4416E090890093F832 /* Security.framework */,
 				50589D4216E0907D0093F832 /* AssetsLibrary.framework */,
@@ -570,6 +568,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sina.Com Technology (China) Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/KuaiPanOpenAPI.kpframework\"",
@@ -581,6 +580,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "B3C5311C-7B53-4AD6-9D50-681F8FDC4C5A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

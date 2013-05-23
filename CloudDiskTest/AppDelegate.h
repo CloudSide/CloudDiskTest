@@ -20,4 +20,7 @@
 
 @property (retain, nonatomic) id currentViewController;
 
+- (NSString *)filePath: (NSString* )fileName;
+- (void)scheduleAlarm;
+
 @end

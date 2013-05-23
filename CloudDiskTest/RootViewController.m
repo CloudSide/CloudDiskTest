@@ -187,6 +187,19 @@
 
 - (void)onSignUpButton:(id)sender {
     
+    if (self.textFieldName.text == nil || self.textFieldPhone.text == nil) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法登陆"
+                                                            message:[NSString stringWithFormat:@"请先填写您的姓名及电话"]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Okay"
+                                                  otherButtonTitles:nil];
+        
+        [alertView show];
+        [alertView release];
+        return;
+    }
+    
     NSString *fileName = [self filePath:@"userInfo.archiver"];
     NSData   *dataLoad     = [NSData dataWithContentsOfFile:fileName];
     
@@ -195,6 +208,12 @@
 
     } else {
         
+        NSDate *date = [NSDate date];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *dateComps;
+        dateComps = [calendar components:NSMonthCalendarUnit fromDate:date];
+        NSString * month = [NSString stringWithFormat:@"%d", [dateComps month]];
+        
         NSMutableData   *data     = [NSMutableData data];
         NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
         
@@ -202,6 +221,7 @@
         [archiver encodeObject:self.numTaskToDo forKey:@"userNumTaskToDo"];
         [archiver encodeObject:self.textFieldName.text forKey:@"userName"];
         [archiver encodeObject:self.textFieldPhone.text forKey:@"userPhone"];
+        [archiver encodeObject:month forKey:@"userTaskMonth"];
         
         [archiver finishEncoding];
         [data writeToFile:fileName atomically:YES];
