@@ -268,6 +268,7 @@
 
 - (void)createButton:(UIButton *)button withName:(NSString *)name atView:(UIView *)view
 {
+    /*
     button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setExclusiveTouch:YES];
     
@@ -292,6 +293,7 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGColorRef colorRef = CGColorCreate(colorSpace,(CGFloat[]){ 1, 0, 0, 0 });
     [button.layer setBorderColor:colorRef];
+    CGColorRelease(colorRef);
     
     if ([name isEqualToString:nameVDiskBtn]) {
         
@@ -343,6 +345,7 @@
     }
     
     [view addSubview:button];
+     */
 }
 
 
