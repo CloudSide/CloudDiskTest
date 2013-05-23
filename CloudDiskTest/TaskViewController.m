@@ -1138,7 +1138,7 @@
                     _isRunning = NO;
                     [_cancelButton setHidden:YES];
                     
-                    if (_numTaskFinished != 1) {
+                    if (_numTaskFinished != 2) {
                         
                         if (_taskFlag == 0) {
                             
@@ -1407,7 +1407,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (_numTaskFinished == 1) {
+    if (_numTaskFinished == 2) {
         
         _numTaskFinished = 0;
         [self taskFinished];

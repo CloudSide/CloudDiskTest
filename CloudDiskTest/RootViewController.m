@@ -226,6 +226,12 @@
         [archiver finishEncoding];
         [data writeToFile:fileName atomically:YES];
         [archiver release];
+        
+        _textFieldName.textColor = [UIColor grayColor];
+        [_textFieldName setUserInteractionEnabled:NO];
+        
+        _textFieldPhone.textColor = [UIColor grayColor];
+        [_textFieldPhone setUserInteractionEnabled:NO];
     }
     
     // 登陆
@@ -239,7 +245,8 @@
     }else {
         
         //
-        [self onSignOutButton:nil];
+        [_bdConnect currentUserLogout];
+        [[VdiskSession sharedSession] unlink];
         [[VdiskSession sharedSession] linkWithSessionType:kVdiskSessionTypeDefault];
         
         //
@@ -252,6 +259,15 @@
     
     [_bdConnect currentUserLogout];
     [[VdiskSession sharedSession] unlink];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:[NSString stringWithFormat:@"账号已注销"]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+    
+    [alertView show];
+    [alertView release];
 }
 
 - (NSString *)filePath: (NSString* )fileName {
