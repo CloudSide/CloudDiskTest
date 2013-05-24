@@ -58,6 +58,7 @@
 @property (nonatomic, retain) UILabel *taskAProcessLabel;
 @property (nonatomic, retain) UILabel *taskBProcessLabel;
 @property (nonatomic, retain) UILabel *taskHint;
+@property (nonatomic, retain) UILabel *labelHint;
 
 @property (nonatomic, retain) NSString *userName;
 @property (nonatomic, retain) NSString *phoneNum;

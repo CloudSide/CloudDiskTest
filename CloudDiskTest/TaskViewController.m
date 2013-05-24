@@ -26,6 +26,7 @@
 @synthesize internetReachable = _internetReachable;
 @synthesize networkLabel = _networkLabel;
 @synthesize taskHint = _taskHint;
+@synthesize labelHint = _labelHint;
 
 @synthesize deletePath = _deletePath;
 @synthesize request = _request;
@@ -53,6 +54,7 @@
     [_taskAProcessLabel release];
     [_taskBProcessLabel release];
     [_taskHint release];
+    [_labelHint release];
     [_userName release];
     [_phoneNum release];
     
@@ -117,6 +119,12 @@
     label.text = [NSString stringWithFormat:@"第 %d 轮任务，包括任务A、任务B", 5-num+1];
     [self.view addSubview:label];
     
+    _labelHint = [[[UILabel alloc] initWithFrame:CGRectMake(60, 10, 250, 50)] autorelease];
+    _labelHint.text = [NSString stringWithFormat:@"正在测试，请不要关闭程序"];
+    [self.view addSubview:_labelHint];
+    _labelHint.textColor = [UIColor redColor];
+    [_labelHint setHidden:YES];
+    
     _taskButton3G = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_taskButton3G setExclusiveTouch:YES];
     [_taskButton3G setTitle:@"任务A：（2G/3G 网络测试）" forState:UIControlStateNormal];
@@ -166,11 +174,13 @@
     [self.view addSubview:[_taskAProcessLabel retain]];
     [_taskAProcessLabel setHidden:YES];
     [_taskAProcessLabel setFont: [UIFont fontWithName:@"Helvetica Neue" size:14]];
+    _taskAProcessLabel.textColor = [UIColor redColor];
     
     _taskBProcessLabel = [[[UILabel alloc] initWithFrame:CGRectMake(60, 280, 250, 30)] autorelease];
     [self.view addSubview:[_taskBProcessLabel retain]];
     [_taskBProcessLabel setHidden:YES];
     [_taskBProcessLabel setFont: [UIFont fontWithName:@"Helvetica Neue" size:14]];
+    _taskBProcessLabel.textColor = [UIColor redColor];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_backButton setExclusiveTouch:YES];
@@ -252,6 +262,12 @@
     objAppDelegate.currentViewController = [self retain];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    if (_isRunning) {
+        [self onCancelTask:nil];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -293,6 +309,8 @@
         [[NSFileManager defaultManager] removeItemAtPath:tmpDirectory2 error:nil];
         
         [self upLoadDataVdisk:_taskIndex];
+        
+        [_labelHint setHidden:NO];
     }
 }
 
@@ -330,6 +348,8 @@
         [[NSFileManager defaultManager] removeItemAtPath:tmpDirectory2 error:nil];
         
         [self upLoadDataVdisk:_taskIndex];
+        
+        [_labelHint setHidden:NO];
     }
 }
 
@@ -659,6 +679,7 @@
     [_cancelButton setHidden:YES];
     
     _isRunning = NO;
+    [_labelHint setHidden:YES];
     
     [self cleanTempFiles];
 }
@@ -701,6 +722,8 @@
     
     AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [objAppDelegate scheduleAlarm];
+    
+    [_labelHint setHidden:YES];
     
     [self onBackButton:nil];
 }
@@ -880,6 +903,8 @@
     _indexRound = 0;
     _processTotal = 0;
     
+    [_labelHint setHidden:YES];
+    
     //delete tmp file
     [[NSFileManager defaultManager] removeItemAtPath:[error.userInfo objectForKey:@"sourcePath"] error:nil];
     
@@ -966,6 +991,8 @@
     _bDiskUpDownFlag = 0;
     _indexRound = 0;
     _processTotal = 0;
+    
+    [_labelHint setHidden:YES];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [paths objectAtIndex:0];
@@ -1089,6 +1116,7 @@
             
             [_backButton setUserInteractionEnabled:YES];
             [_cancelButton setHidden:YES];
+            [_labelHint setHidden:YES];
             
             [[NSFileManager defaultManager] removeItemAtPath:_deletePath error:nil];
         }
@@ -1246,6 +1274,7 @@
             
             [_backButton setUserInteractionEnabled:YES];
             [_cancelButton setHidden:YES];
+            [_labelHint setHidden:YES];
         }
     }
     
@@ -1315,6 +1344,7 @@
         
         [_backButton setUserInteractionEnabled:YES];
         [_cancelButton setHidden:YES];
+        [_labelHint setHidden:YES];
         
         //delete tmp file
         [[NSFileManager defaultManager] removeItemAtPath:_deletePath error:nil];
@@ -1370,6 +1400,7 @@
         
         [_backButton setUserInteractionEnabled:YES];
         [_cancelButton setHidden:YES];
+        [_labelHint setHidden:YES];
     }
     
     if ([[VdiskSession sharedSession] isLinked] && ![[VdiskSession sharedSession] isExpired] && [self.bdConnect isUserSessionValid]) {

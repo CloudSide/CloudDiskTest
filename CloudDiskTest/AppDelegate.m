@@ -45,6 +45,7 @@
     
     // 通知
     [self scheduleAlarm];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES ];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -454,6 +455,11 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     _applicationFromBackground = TRUE;
+    
+    if ([_currentViewController isKindOfClass:[TaskViewController class]]) {
+        
+        [(TaskViewController *)_currentViewController viewWillDisappear:NO];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
