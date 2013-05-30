@@ -45,7 +45,7 @@
     
     // 通知
     [self scheduleAlarm];
-    [[UIApplication sharedApplication] setIdleTimerDisabled:YES ];
+    //[[UIApplication sharedApplication] setIdleTimerDisabled:YES ];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

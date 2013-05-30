@@ -130,8 +130,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
+    // 锁屏
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES ];
+    
     AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     objAppDelegate.currentViewController = [self retain];
+    
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning

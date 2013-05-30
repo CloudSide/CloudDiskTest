@@ -184,15 +184,15 @@
     
     _backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_backButton setExclusiveTouch:YES];
-    [_backButton setTitle:@"返回" forState:UIControlStateNormal];
-    _backButton.frame = CGRectMake(20, 410, 50, 30);
+    [_backButton setTitle:@"取消本轮任务" forState:UIControlStateNormal];
+    _backButton.frame = CGRectMake(20, 410, 100, 30);
     [_backButton addTarget:self action:@selector(onBackButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_backButton];
     
     _cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_cancelButton setExclusiveTouch:YES];
-    [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-    _cancelButton.frame = CGRectMake(250, 410, 50, 30);
+    [_cancelButton setTitle:@"停止当前任务" forState:UIControlStateNormal];
+    _cancelButton.frame = CGRectMake(200, 410, 100, 30);
     [_cancelButton addTarget:self action:@selector(onCancelTask:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_cancelButton];
     [_cancelButton setHidden:YES];
@@ -260,6 +260,8 @@
     
     AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     objAppDelegate.currentViewController = [self retain];
+    
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -267,6 +269,8 @@
     if (_isRunning) {
         [self onCancelTask:nil];
     }
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -616,12 +620,14 @@
 
 - (void)onBackButton:(id)sender {
     
-    [_taskButton3G retain];
-    [_taskButtonWifi retain];
-    [_backButton retain];
-    [_internetReachable retain];
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:@"提示"];
+    [alert setMessage:@"取消本轮任何后，本轮已完成的任务也将撤销，下次需要再次执行。确定要取消吗？"];
+    [alert setDelegate:self];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
+    [alert show];
+    [alert release];
 }
 
 - (void)onCancelTask:(id)sender {
@@ -725,7 +731,12 @@
     
     [_labelHint setHidden:YES];
     
-    [self onBackButton:nil];
+    [_taskButton3G retain];
+    [_taskButtonWifi retain];
+    [_backButton retain];
+    [_internetReachable retain];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cleanTempFiles {
@@ -1442,9 +1453,8 @@
         
         _numTaskFinished = 0;
         [self taskFinished];
-    }
     
-    if (_alertByNetChange) {
+    } else if (_alertByNetChange) {
         
         _alertByNetChange = NO;
         
@@ -1470,7 +1480,20 @@
             [alertView show];
             [alertView release];
         }
+    } else {
+        
+        if (buttonIndex == 0) {
+            
+            [_taskButton3G retain];
+            [_taskButtonWifi retain];
+            [_backButton retain];
+            [_internetReachable retain];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
+    
+    
 }
 
 @end

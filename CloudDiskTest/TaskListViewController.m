@@ -60,6 +60,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+
+    // 锁屏
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES ];
     
     AppDelegate *objAppDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     objAppDelegate.currentViewController = [self retain];
@@ -80,6 +83,8 @@
         [unArchiver finishDecoding];
         [unArchiver release];
     }
+    
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
