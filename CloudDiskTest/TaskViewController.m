@@ -645,8 +645,7 @@
     if (_request != nil && ![_request isFinished]) {
         
         [_request cancel];
-        [_request setDelegate:nil];
-        [_request setDownloadProgressDelegate:nil];
+        [_request clearDelegatesAndCancel];
     }
     
     _taskFailed = YES;
@@ -656,34 +655,29 @@
     _indexRound = 0;
     _processTotal = 0;
     
+    NSString *alertTitle = nil;
+    
     if (_taskFlag == 0) {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"任务A失败"
-                                                            message:[NSString stringWithFormat:@"请重试"]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Okay"
-                                                  otherButtonTitles:nil];
-        
-        [alertView show];
-        [alertView release];
-        
+        alertTitle = @"任务A已取消";
         [_taskButton3G setUserInteractionEnabled:YES];
         [_taskAProcessLabel setHidden:YES];
         
     } else {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"任务B失败"
-                                                            message:[NSString stringWithFormat:@"请重试"]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Okay"
-                                                  otherButtonTitles:nil];
-        
-        [alertView show];
-        [alertView release];
-        
+        alertTitle = @"任务B已取消";
         [_taskButtonWifi setUserInteractionEnabled:YES];
         [_taskBProcessLabel setHidden:YES];
     }
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                        message:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+    
+    [alertView show];
+    [alertView release];
     
     [_backButton setUserInteractionEnabled:YES];
     [_cancelButton setHidden:YES];
@@ -823,7 +817,7 @@
     if (_isRunning) {
         
         _alertByNetChange = YES;
-        [self stopTask];
+        [self onCancelTask:nil];
     }
     
     if ([TaskViewController IsEnable3G]) {
