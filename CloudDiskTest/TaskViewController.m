@@ -98,6 +98,8 @@
         _isRunning = NO;
         _alertByNetChange = NO;
         
+        _taskFailed = NO;
+        
         _clogUpload = [[CLog alloc] init];
         [_clogUpload setCustomType:kLogCustomType];
         
@@ -647,6 +649,8 @@
         [_request setDownloadProgressDelegate:nil];
     }
     
+    _taskFailed = YES;
+    
     _taskIndex = 0;
     _bDiskUpDownFlag = 0;
     _indexRound = 0;
@@ -877,6 +881,8 @@
 
 - (void)restClient:(VdiskRestClient *)client uploadFileFailedWithError:(NSError *)error {
     
+    _taskFailed = YES;
+    
     if (_taskFlag == 0) {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"任务A失败"
@@ -965,6 +971,8 @@
 }
 
 - (void)restClient:(VdiskRestClient *)client loadFileFailedWithError:(NSError *)error {
+    
+    _taskFailed = YES;
     
     if (_taskFlag == 0) {
         
@@ -1095,6 +1103,7 @@
             _bDiskUpDownFlag = 0;
             _indexRound = 0;
             _processTotal = 0;
+            _taskFailed = YES;
             
             if (_taskFlag == 0) {
                 
@@ -1247,6 +1256,7 @@
             _bDiskUpDownFlag = 0;
             _indexRound = 0;
             _processTotal = 0;
+            _taskFailed = YES;
             
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *documentsDirectoryPath = [paths objectAtIndex:0];
@@ -1311,6 +1321,8 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
+    _taskFailed = YES;
+    
     if (_bDiskUpDownFlag == 0) {
         
         [self getData];
@@ -1480,6 +1492,9 @@
             [alertView show];
             [alertView release];
         }
+    } else if (_taskFailed == YES) {
+        
+        _taskFailed = NO;
     } else {
         
         if (buttonIndex == 0) {

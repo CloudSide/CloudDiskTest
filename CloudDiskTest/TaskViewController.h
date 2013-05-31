@@ -41,6 +41,7 @@
     
     BOOL _isRunning;
     BOOL _alertByNetChange;
+    BOOL _taskFailed;
 }
 
 @property (nonatomic, retain) Baidu *bdConnect;
