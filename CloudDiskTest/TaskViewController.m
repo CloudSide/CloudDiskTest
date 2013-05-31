@@ -644,7 +644,7 @@
     
     if (_request != nil && ![_request isFinished]) {
         
-        [_request cancel];
+        //[_request cancel];
         [_request clearDelegatesAndCancel];
     }
     
